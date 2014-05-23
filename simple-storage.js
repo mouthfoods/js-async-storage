@@ -60,9 +60,13 @@ SimpleStorage = {
 		}, 0);
 	},
 
-	setItemAsync : function (key, value, callback){
+	setItemAsync : function (key, value, callback, onError){
 		window.setTimeout(function() {
-   			callback(SimpleStorage.setItem(key, value));
+			try {
+				callback(SimpleStorage.setItem(key, value));
+			} catch (e) {
+				onError(e);
+			}
 		}, 0);
 	},
 
